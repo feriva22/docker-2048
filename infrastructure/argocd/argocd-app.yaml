@@ -19,6 +19,6 @@ spec:
 
   # Source of the application manifests
   source:
-    repoURL: https://github.com/argoproj/argocd-example-apps.git  # Can point to either a Helm chart repo or a git repo.
+    repoURL: https://github.com/feriva22/docker-2048.git  # Can point to either a Helm chart repo or a git repo.
     targetRevision: HEAD
     path: infrastructure/kubernetes  
