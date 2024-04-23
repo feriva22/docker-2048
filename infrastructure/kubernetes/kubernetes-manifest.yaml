@@ -2,23 +2,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: 2048-game
-  name: 2048-game
+    app: game-2048
+  name: game-2048
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: 2048-game
+      app: game-2048
   template:
     metadata:
       labels:
-        app: 2048-game
+        app: game-2048
     spec:
       containers:
       - image: feriva22/docker-2048:latest
         imagePullPolicy: IfNotPresent
-        name: 2048-game
+        name: game-2048
         resources: {}
       restartPolicy: Always
 ---
@@ -26,8 +26,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: 2048-game
-  name: 2048-game
+    app: game-2048
+  name: game-2048
   namespace: default
 spec:
   ports:
@@ -35,23 +35,23 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
-    app: 2048-game
+    app: game-2048
   type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: relay-ingress-2048-game
+  name: relay-ingress-game-2048
   namespace: default
 spec:
   ingressClassName: cloudflare-tunnel
   rules:
-  - host: 2048-game.deploy-at.my.id
+  - host: game-2048.deploy-at.my.id
     http:
       paths:
       - backend:
           service:
-            name: 2048-game
+            name: game-2048
             port:
               number: 80
         path: /
